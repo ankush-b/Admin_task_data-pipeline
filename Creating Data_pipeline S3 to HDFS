@@ -1,0 +1,34 @@
+-----**** Creating a data pipeline from s3 to hdfs and vice versa ****-----
+
+cd /usr/loca/hadoop/etc/hadoop
+
+ls
+
+My Account>>My security credentials>>Access Key>> Create New (Copy or download)
+
+Create new or Download Access Key and Secret Key from my security credentials
+
+nano core-site.xml
+
+<property>
+  <name>fs.s3a.access.key</name>
+  <description>AWS access key ID used by S3A file system.</description>
+  <value>AKIAJBKWN2TLE35NEN3Q</value> 
+</property>
+
+<property>
+  <name>fs.s3a.secret.key</name>
+  <description>AWS secret key used by S3A file system.</description>
+  <value>KVzJDzdAkoNX2wXm5wDulA9dvnCTsKhicsd3UsE4</value>
+</property>
+
+
+
+nano hadoop-env.sh
+
+export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:$HADOOP_HOME/share/hadoop/tools/lib/*
+
+
+***hadoop fs -cp s3a://<bucket-name>/<file-name> hdfs:///user/hduser/**(Use for hadoop 1 which is now depriecated)
+
+hdfs dfs -cp s3a://<bucket-name>/<file-name> /user/hduser/ (make sure your filename doest contain any space/speacial charecter)
